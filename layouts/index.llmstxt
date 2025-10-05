@@ -1,0 +1,80 @@
+# {{ .Site.Title }}
+
+> {{ .Site.Params.description }}
+
+## About
+
+This is a personal blog focused on software development, technology tutorials, and project showcases.
+
+**Author**: {{ .Site.Params.author }}
+**URL**: {{ .Site.BaseURL }}
+
+## Content Sections
+
+### Posts
+URL: {{ .Site.BaseURL }}posts/
+Description: Technical articles, tutorials, and blog posts about programming, development tools, and software engineering.
+
+### Projects
+URL: {{ .Site.BaseURL }}projects/
+Description: Open source projects and personal coding experiments. Includes Go, Java, and web development projects.
+
+Featured Projects:
+{{- range first 5 (where .Site.RegularPages "Section" "projects") }}
+- {{ .Title }}: {{ .Permalink }}
+  {{ .Summary | plainify | truncate 100 }}
+{{- end }}
+
+### Tools
+URL: {{ .Site.BaseURL }}tools/
+Description: Useful development tools, scripts, and utilities.
+
+### About
+URL: {{ .Site.BaseURL }}about/
+Description: Information about the author and this blog.
+
+## Recent Posts
+
+{{- range first 5 (where .Site.RegularPages "Section" "posts") }}
+- {{ .Title }} ({{ .Date.Format "2006-01-02" }})
+  {{ .Permalink }}
+  {{ .Summary | plainify | truncate 150 }}
+{{- end }}
+
+## Key Topics
+
+- Software Development
+- Go Programming
+- Java Development
+- Web Technologies
+- DevOps & Tools
+- Database & ORM
+- SSH & Networking
+- LLM & AI
+
+## Contact
+
+{{- if .Site.Params.social.github }}
+- GitHub: {{ .Site.Params.social.github }}
+{{- end }}
+{{- if .Site.Params.social.twitter }}
+- Twitter: {{ .Site.Params.social.twitter }}
+{{- end }}
+
+## Technical Details
+
+- Built with: Hugo Static Site Generator
+- Theme: Custom Terminal-style Theme
+- Language: Chinese (Simplified) with English content
+- License: Content available for educational purposes
+
+## Navigation
+
+- Sitemap: {{ .Site.BaseURL }}sitemap.xml
+- RSS Feed: {{ .Site.BaseURL }}index.xml
+- Robots.txt: {{ .Site.BaseURL }}robots.txt
+
+---
+
+Last updated: {{ now.Format "2006-01-02" }}
+Generated with Hugo {{ hugo.Version }}

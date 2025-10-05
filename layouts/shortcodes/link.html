@@ -1,0 +1,8 @@
+{{- $url := .Get 0 -}}
+{{- $text := .Get 1 | default $url -}}
+
+<a href="{{ $url }}" target="_blank" rel="noopener noreferrer" class="external-link">
+  {{ $text }}
+  <span class="external-link-icon">↗</span>
+</a>
+

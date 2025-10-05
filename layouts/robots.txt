@@ -1,0 +1,58 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: {{ .Site.BaseURL }}sitemap.xml
+
+# LLMs.txt for AI agents
+# See: https://llmstxt.org/
+Allow: /llms.txt
+Allow: /llms-full.txt
+
+# Allow common crawlers
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Baiduspider
+Allow: /
+
+# AI Crawlers
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+# Disallow admin and private areas if any
+Disallow: /admin/
+Disallow: /private/
+
+# Crawl-delay (optional, adjust if needed)
+Crawl-delay: 1

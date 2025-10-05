@@ -1,0 +1,81 @@
+{{ define "main" }}
+<div class="home-page">
+  <div class="container">
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="terminal-prompt">
+        <span class="prompt-icon">{{ .Site.Params.prompt }}</span>
+      </div>
+      <h1 class="hero-title">&gt; Welcome to Usedong</h1>
+      <p class="hero-description">{{ .Site.Params.description }} </p>
+    </section>
+
+
+    <!-- Recent Posts Section -->
+    <section class="home-posts">
+      <div class="section-header">
+        <span class="terminal-prompt-green">$</span>
+        <h2 class="section-title">tail -n 3 articles.log</h2>
+      </div>
+
+      <div class="posts-grid">
+        {{ range first 3 (where .Site.RegularPages "Section" "posts") }}
+        <article class="post-card">
+          <a href="{{ .Permalink }}" class="post-card-link">
+            {{ if .Params.image }}
+            <div class="post-card-image">
+              <img src="{{ .Params.image | absURL }}" alt="{{ .Title }}">
+            </div>
+            {{ end }}
+
+            <div class="post-card-content">
+              <h3 class="post-card-title">{{ .Title }}</h3>
+              <p class="post-card-description">{{ .Summary | truncate 80 }}</p>
+              <div class="post-card-meta">
+                <span class="post-date">{{ .Date.Format "2006-01-02" }}</span>
+              </div>
+            </div>
+          </a>
+        </article>
+        {{ end }}
+      </div>
+
+      <div class="section-footer">
+        <a href="/posts" class="btn-link">View all posts →</a>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="home-projects">
+      <div class="section-header">
+        <span class="terminal-prompt-green">$</span>
+        <h2 class="section-title">ls -l projects/</h2>
+      </div>
+
+      <div class="projects-grid">
+        {{ range first 3 (where .Site.RegularPages "Section" "projects") }}
+        <article class="project-card">
+          <a href="{{ .Permalink }}" class="project-card-link">
+            {{ if .Params.image }}
+            <div class="project-image">
+              <img src="{{ .Params.image | absURL }}" alt="{{ .Title }}">
+            </div>
+            {{ end }}
+
+            <div class="project-content">
+              <h3 class="project-title">{{ .Title }}</h3>
+              <p class="project-description">{{ .Summary | truncate 100 }}</p>
+            </div>
+          </a>
+        </article>
+        {{ end }}
+      </div>
+
+      <div class="section-footer">
+        <a href="https://github.com/youkale" class="btn-link">View GitHub →</a>
+      </div>
+    </section>
+
+  </div>
+</div>
+{{ end }}

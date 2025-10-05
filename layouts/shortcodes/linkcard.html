@@ -1,0 +1,26 @@
+{{- $url := .Get "url" -}}
+{{- $title := .Get "title" -}}
+{{- $description := .Get "description" -}}
+{{- $image := .Get "image" -}}
+{{- $site := .Get "site" -}}
+
+<div class="link-card">
+  <a href="{{ $url }}" target="_blank" rel="noopener noreferrer" class="link-card-wrapper">
+    {{- if $image -}}
+    <div class="link-card-image">
+      <img src="{{ $image }}" alt="{{ $title }}" loading="lazy">
+    </div>
+    {{- end -}}
+    <div class="link-card-content">
+      <h4 class="link-card-title">{{ $title }}</h4>
+      {{- if $description -}}
+      <p class="link-card-description">{{ $description }}</p>
+      {{- end -}}
+      <div class="link-card-footer">
+        <span class="link-card-icon">🔗</span>
+        <span class="link-card-url">{{ $site | default $url }}</span>
+      </div>
+    </div>
+  </a>
+</div>
+

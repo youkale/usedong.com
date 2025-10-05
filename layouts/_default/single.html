@@ -1,0 +1,54 @@
+{{ define "main" }}
+<article class="single-page">
+  <div class="container">
+    <!-- Article Header -->
+    <header class="article-header">
+      {{ if .Params.image }}
+      <div class="article-featured-image">
+        <img src="{{ .Params.image | absURL }}" alt="{{ .Title }}">
+      </div>
+      {{ end }}
+
+
+      <h1 class="article-title">{{ .Title }}</h1>
+
+      <div class="article-meta">
+        <span class="meta-author">Posted by {{ .Site.Params.author }} on {{ .Date.Format "2006-01-02" }}</span>
+      </div>
+    </header>
+
+    <!-- Article Content -->
+    <div class="article-content">
+      {{ .Content }}
+    </div>
+
+    <!-- Article Footer -->
+    <footer class="article-footer">
+      {{ if .Params.tags }}
+      <div class="article-tags">
+        {{ range .Params.tags }}
+        <a href="{{ " tags" | absURL }}/{{ . | urlize }}" class="tag">{{ . }}</a>
+        {{ end }}
+      </div>
+      {{ end }}
+
+      <!-- Navigation -->
+      <nav class="article-navigation">
+        {{ if .PrevInSection }}
+        <div class="nav-prev">
+          <span class="nav-label">← Previous</span>
+          <a href="{{ .PrevInSection.Permalink }}" class="nav-title">{{ .PrevInSection.Title }}</a>
+        </div>
+        {{ end }}
+
+        {{ if .NextInSection }}
+        <div class="nav-next">
+          <span class="nav-label">Next →</span>
+          <a href="{{ .NextInSection.Permalink }}" class="nav-title">{{ .NextInSection.Title }}</a>
+        </div>
+        {{ end }}
+      </nav>
+    </footer>
+  </div>
+</article>
+{{ end }}

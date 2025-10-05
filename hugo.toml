@@ -1,3 +1,94 @@
-baseURL = 'https://example.org/'
-languageCode = 'en-us'
-title = 'My New Hugo Site'
+baseURL = 'http://localhost:1313/'
+languageCode = 'zh-cn'
+defaultContentLanguage = 'zh-cn'
+title = 'Usedong'
+enableRobotsTXT = true
+
+
+# Pagination
+[pagination]
+  pagerSize = 10
+
+# Summary configuration
+summaryLength = 100
+
+# Enable emoji support
+enableEmoji = true
+
+# Menu configuration
+[menu]
+  [[menu.main]]
+    identifier = "home"
+    name = ":Home"
+    url = "/"
+    weight = 1
+
+  [[menu.main]]
+    identifier = "posts"
+    name = ":Posts"
+    url = "/posts"
+    weight = 2
+
+  [[menu.main]]
+    identifier = "tools"
+    name = ":工具"
+    url = "/tools"
+    weight = 4
+
+
+# Site parameters
+[params]
+  # Basic info
+  author = "Youkale"
+  description = "Explore my Tthoughts, Favorites, and Useful Tools."
+  keywords = "blog, developer, programming"
+
+  # Avatar/Logo
+  avatar = "https://avatars.githubusercontent.com/u/3401774?v=4"
+
+  # Social links
+  [params.social]
+    github = "https://github.com/youkale"
+
+  # Google Analytics
+  googleAnalytics = "" # Add your GA tracking ID
+
+  # Google Adsense
+  googleAdsense = "" # Add your Adsense client ID
+
+  # Features
+  showProjectsOnHome = true
+  showRecentPostsOnHome = true
+  recentPostsLimit = 3
+
+# Taxonomies
+[taxonomies]
+  tag = "tags"
+  category = "categories"
+
+# Output formats
+[outputs]
+  home = ["HTML", "RSS", "llmstxt"]
+  section = ["HTML", "RSS"]
+
+# Custom output format for llms.txt
+[outputFormats.llmstxt]
+  name = "llmstxt"
+  mediaType = "text/plain"
+  baseName = "llms"
+  isPlainText = true
+  notAlternative = true
+
+# Sitemap configuration
+[sitemap]
+  changefreq = "weekly"
+  filename = "sitemap.xml"
+  priority = 0.5
+
+# Markup configuration
+[markup]
+  [markup.highlight]
+    style = "monokai"
+    lineNos = true
+  [markup.goldmark.renderer]
+    unsafe = true

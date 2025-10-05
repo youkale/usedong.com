@@ -1,0 +1,82 @@
+{{ define "main" }}
+<div class="list-page">
+  <div class="container">
+    <!-- Page Header -->
+    <header class="page-header">
+      <div class="terminal-prompt">
+        <span class="prompt-icon">{{ .Site.Params.prompt }}</span>
+      </div>
+      <h1 class="page-title">:{{ .Section | title }}</h1>
+      {{ if .Content }}
+      <div class="page-description">
+        {{ .Content }}
+      </div>
+      {{ end }}
+    </header>
+
+    <!-- Content List -->
+    <div class="content-list">
+      {{ range .Paginator.Pages }}
+      <article class="list-item">
+        <div class="list-item-content">
+          <div class="list-item-header">
+            <span class="terminal-prompt-green">&gt;</span>
+            <h2 class="list-item-title">
+              <a href="{{ .Permalink }}">{{ .Title }}</a>
+            </h2>
+          </div>
+
+          {{ if .Summary }}
+          <p class="list-item-summary">{{ .Summary | plainify | truncate 200 }}</p>
+          {{ end }}
+
+          <div class="list-item-meta">
+            <span class="meta-date">Published on {{ .Date.Format "2006-01-02" }}</span>
+            {{ if .Params.tags }}
+            <span class="meta-separator">|</span>
+            <div class="meta-tags">
+              {{ range .Params.tags }}
+              <span class="tag">{{ . }}</span>
+              {{ end }}
+            </div>
+            {{ end }}
+          </div>
+        </div>
+
+        {{ if .Params.image }}
+        <div class="list-item-image">
+          <img src="{{ .Params.image | absURL }}" alt="{{ .Title }}">
+        </div>
+        {{ end }}
+      </article>
+      {{ end }}
+    </div>
+
+    <!-- Pagination -->
+    {{ if gt .Paginator.TotalPages 1 }}
+    <nav class="pagination">
+      <div class="pagination-links">
+        {{ if .Paginator.HasPrev }}
+        <a href="{{ .Paginator.Prev.URL }}" class="pagination-link">[&lt;&lt; prev]</a>
+        {{ else }}
+        <span class="pagination-link disabled">[&lt;&lt; prev]</span>
+        {{ end }}
+
+        <span class="pagination-current">page [{{ .Paginator.PageNumber }}] of {{ .Paginator.TotalPages }}</span>
+
+        {{ if .Paginator.HasNext }}
+        <a href="{{ .Paginator.Next.URL }}" class="pagination-link">[next &gt;&gt;]</a>
+        {{ else }}
+        <span class="pagination-link disabled">[next &gt;&gt;]</span>
+        {{ end }}
+      </div>
+
+      <div class="pagination-info">
+        <span class="terminal-prompt-green">$</span>
+        <span>Showing {{ len .Paginator.Pages }} of {{ .Paginator.TotalNumberOfElements }} posts</span>
+      </div>
+    </nav>
+    {{ end }}
+  </div>
+</div>
+{{ end }}

@@ -1,0 +1,10 @@
+Place your avatar image here and update the path in hugo.toml
+
+Recommended:
+- File name: avatar.jpg (or avatar.png)
+- Size: 200x200 pixels or larger (will be displayed as 40x40)
+- Format: JPG or PNG
+
+Update in hugo.toml:
+[params]
+  avatar = "/images/avatar.jpg"
