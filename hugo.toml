@@ -1,7 +1,7 @@
 baseURL = 'http://localhost:1313/'
 languageCode = 'zh-cn'
 defaultContentLanguage = 'zh-cn'
-title = 'Usedong'
+title = ':Usedong'
 enableRobotsTXT = true
 
 
@@ -31,7 +31,7 @@ enableEmoji = true
 
   [[menu.main]]
     identifier = "tools"
-    name = ":工具"
+    name = ":Tools"
     url = "/tools"
     weight = 4
 
@@ -40,11 +40,11 @@ enableEmoji = true
 [params]
   # Basic info
   author = "Youkale"
-  description = "Explore my Tthoughts, Favorites, and Useful Tools."
+  description = "Explore my Tthoughts, Favorites and Useful Tools."
   keywords = "blog, developer, programming"
 
   # Avatar/Logo
-  avatar = "https://avatars.githubusercontent.com/u/3401774?v=4"
+  # avatar = "https://avatars.githubusercontent.com/u/3401774?v=4"
 
   # Social links
   [params.social]
