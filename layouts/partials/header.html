@@ -29,7 +29,7 @@
         </button>
 
         {{ if .Site.Params.avatar }}
-        <a href="/about" class="avatar-link">
+        <a href="{{ " about" | relURL }}" class="avatar-link">
           <img src="{{ .Site.Params.avatar | absURL }}" alt="Avatar" class="avatar">
         </a>
         {{ end }}
