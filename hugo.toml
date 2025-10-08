@@ -43,18 +43,18 @@ enableEmoji = true
   description = "Explore my Tthoughts, Favorites and Useful Tools."
   keywords = "blog, developer, programming"
 
+# Google Analytics
+  googleAnalytics = "G-T4CLDSPP48" # Add your GA tracking ID
+
+  # Google Adsense
+  googleAdsense = "" # Add your Adsense client ID
+
   # Avatar/Logo
   # avatar = "https://avatars.githubusercontent.com/u/3401774?v=4"
 
   # Social links
   [params.social]
     github = "https://github.com/youkale"
-
-  # Google Analytics
-  googleAnalytics = "G-T4CLDSPP48" # Add your GA tracking ID
-
-  # Google Adsense
-  googleAdsense = "" # Add your Adsense client ID
 
   # Features
   showProjectsOnHome = true
