@@ -1,7 +1,7 @@
 # Cloudflare Pages 配置文件
 # 文档：https://developers.cloudflare.com/pages/
 
-name = "ykl-blog"
+name = "usedong"
 compatibility_date = "2024-01-01"
 
 # Pages 项目配置
