@@ -1,25 +1,32 @@
-# Hugo
+# Hugo 生成的文件
 /public/
 /resources/_gen/
 /assets/jsconfig.json
 hugo_stats.json
 
-# OS
+# OS 文件
 .DS_Store
 Thumbs.db
 
-# IDE
+# 编辑器文件
 .vscode/
 .idea/
 *.swp
 *.swo
 *~
 
-# Node
+# Node.js
 node_modules/
 npm-debug.log
 yarn-error.log
+package-lock.json
+yarn.lock
 
-# Backup files
+# Hugo 缓存
+/.hugo_build.lock
+
+# 临时文件
 *.bak
 *.tmp
+.env
+.env.local

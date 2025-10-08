@@ -1,0 +1,18 @@
+# Cloudflare Pages 配置文件
+# 文档：https://developers.cloudflare.com/pages/
+
+name = "ykl-blog"
+compatibility_date = "2024-01-01"
+
+# Pages 项目配置
+[site]
+bucket = "./public"
+
+# 构建配置
+[build]
+command = "hugo --minify --gc"
+cwd = ""
+watch_dirs = ["content", "layouts", "static", "themes"]
+
+[build.upload]
+format = "service-worker"
