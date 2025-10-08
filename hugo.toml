@@ -51,7 +51,7 @@ enableEmoji = true
     github = "https://github.com/youkale"
 
   # Google Analytics
-  googleAnalytics = "" # Add your GA tracking ID
+  googleAnalytics = "G-T4CLDSPP48" # Add your GA tracking ID
 
   # Google Adsense
   googleAdsense = "" # Add your Adsense client ID
