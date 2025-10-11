@@ -30,6 +30,12 @@ enableEmoji = true
     weight = 2
 
   [[menu.main]]
+    identifier = "translations"
+    name = ":Translations"
+    url = "/translations"
+    weight = 2
+
+  [[menu.main]]
     identifier = "tools"
     name = ":Tools"
     url = "/tools"
