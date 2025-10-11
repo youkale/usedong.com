@@ -2,11 +2,17 @@
 title: "第三章：并行化（Parallelization）"
 date: 2025-10-11
 tags: ["Agent", "AI", "设计模式", "架构"]
-summary: "本文翻译并解读了常见的 Agent 设计模式，包括 ReAct、Chain of Thought、Plan-and-Execute 等，帮助你构建更加稳定和可靠的 AI Agent"
-original_author: "Multiple Sources"
+summary: "通过并行执行多个独立任务来提升智能体系统的效率和响应速度"
+original_author: "Antonio Gulli"
+book: "智能体设计模式"
+chapter: 3
 ---
 
-第三章：并行化（Parallelization）
+[← 上一章：路由](../02-routing/) | [返回目录](../)
+
+---
+
+# 第三章：并行化（Parallelization）
 并行化模式概览
 
 在前面的章节中，我们探讨了用于顺序工作流的提示链（Prompt Chaining），以及用于动态决策和路径转换的路由（Routing）模式。虽然这些模式至关重要，但许多复杂的智能体（agentic）任务涉及多个可以同时执行而非依次执行的子任务。这时，**并行化（Parallelization）**模式就变得至关重要。
@@ -378,27 +384,27 @@ if __name__ == "__main__":
 
 最后，创建了一个名为 ResearchAndSynthesisPipeline 的 SequentialAgent 来编排整个工作流。作为主要控制器，这个主智能体首先执行 ParallelAgent 来进行研究。一旦 ParallelAgent 完成，SequentialAgent 随后执行 MergerAgent 来合成收集到的信息。sequential_pipeline_agent 被设置为 root_agent，代表运行此多智能体系统的入口点。整个过程旨在高效地并行收集来自多个来源的信息，然后将其组合成一个结构化的报告。
 
-## 📋 概要速览（At a Glance）
+## 概要速览（At a Glance）
 
-### 🎯 是什么 (What)
+### 是什么 (What)
 
 许多智能体工作流涉及多个子任务，需要完成这些子任务才能实现最终目标。纯粹的顺序执行（每个任务等待前一个任务完成）通常是低效和缓慢的。当任务依赖于外部 I/O 操作（例如调用不同的 API 或查询多个数据库）时，这种延迟成为了一个显著的瓶颈。缺乏并发执行机制会导致总处理时间是所有单个任务持续时间之和，从而阻碍系统的整体性能和响应能力。
 
 ---
 
-### 💡 为什么 (Why)
+### 为什么 (Why)
 
 并行化模式通过启用独立任务的同时执行，提供了一个标准化的解决方案。它通过识别工作流中不依赖彼此即时输出的组件（如工具使用或 LLM 调用）来工作。LangChain 和 Google ADK 等智能体框架提供了内置的构造来定义和管理这些并发操作。例如，一个主进程可以调用几个并行运行的子任务，并等待它们全部完成后再进行下一步。通过同时运行这些独立任务而非依次运行，此模式显著减少了总执行时间。
 
 ---
 
-### ✅ 经验法则 (Rule of thumb)
+### 经验法则 (Rule of thumb)
 
 当工作流包含多个可以同时运行的独立操作时使用此模式，例如从多个 API 获取数据、处理不同的数据块，或生成多个内容片段以供后续合成。
 
 ---
 
-## 🎨 可视化总结
+## 可视化总结
 
 ![图2](/images/translations/03-parallelization-02.png)
 

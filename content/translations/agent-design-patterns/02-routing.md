@@ -2,10 +2,15 @@
 title: "第二章：路由（Routing）"
 date: 2025-10-10
 tags: ["Agent", "AI", "设计模式", "架构"]
-summary: "本文翻译并解读了常见的 Agent 设计模式，包括 ReAct、Chain of Thought、Plan-and-Execute 等，帮助你构建更加稳定和可靠的 AI Agent"
-original_author: "Multiple Sources"
+summary: "智能路由机制，让 AI 根据上下文动态选择最合适的工具、功能或子智能体"
+original_author: "Antonio Gulli"
+book: "智能体设计模式"
+chapter: 2
 ---
 
+[← 上一章：提示链](../01-prompt-chaining/) | [返回目录](../) | [下一章：并行化 →](../03-parallelization/)
+
+---
 
 # 第二章：路由（Routing）
 
@@ -380,27 +385,27 @@ Final Output D: Booking action for 'Find flights to Tokyo next month.' has been 
 
 ---
 
-## 📋 一览（At a Glance）
+## 一览（At a Glance）
 
-### 🎯 质（What）
+### 质（What）
 
 **智能体系统**通常必须响应各种无法通过单一、线性流程处理的输入和情境。简单的顺序工作流**缺乏**根据上下文做出决策的能力。如果缺少针对特定任务选择正确工具或子流程的机制，系统将保持**僵硬**且**无法适应**。这种限制使得构建能够管理现实世界用户请求的复杂性和多变性的复杂应用程序变得困难。
 
 ---
 
-### 💡 理（Why）
+### 理（Why）
 
 **路由模式**通过在智能体的操作框架中引入**条件逻辑**，提供了一个标准化解决方案。它使系统能够**首先分析**传入的查询以确定其意图或性质。基于此分析，智能体**动态地**将控制流导向最合适的专业工具、功能或子智能体。此决策可以通过多种方法驱动，包括提示大语言模型、应用预定义规则或使用**基于嵌入向量的语义相似性**。最终，路由将**静态、预定**的执行路径，转换为能够选择**最佳可行行动**的**灵活且上下文感知**的工作流程。
 
 ---
 
-### ✅ 法（Rule of Thumb）
+### 法（Rule of Thumb）
 
 当智能体**必须**根据用户输入或当前状态**在多个不同的工作流程、工具或子智能体之间做出决策**时，请使用路由模式。这对于需要**分类或分流**传入请求以处理不同类型任务的应用程序至关重要，例如客户支持机器人区分销售咨询、技术支持和账户管理问题。
 
 ---
 
-### 🎨 图（Visual Summary）
+### 图（Visual Summary）
 
 ![图1](/images/translations/02-router-parttent.png)
 _Fig.1: Router pattern, using an LLM as a Router（使用大语言模型作为路由器的路由模式）_

@@ -2,9 +2,16 @@
 title: "第一章：提示链（Prompt Chaining）"
 date: 2025-10-10
 tags: ["Agent", "AI", "设计模式", "架构"]
-summary: "本文翻译并解读了常见的 Agent 设计模式，包括 ReAct、Chain of Thought、Plan-and-Execute 等，帮助你构建更加稳定和可靠的 AI Agent"
-original_author: "Multiple Sources"
+summary: "通过链式提示构建复杂任务流程，将庞大的任务分解为一系列更小、更易于管理的子问题"
+original_author: "Antonio Gulli"
+book: "智能体设计模式"
+chapter: 1
 ---
+
+[返回目录](../) | [下一章：路由 →](../02-routing/)
+
+---
+
 # 第一章：提示链（Prompt Chaining）
 
 ## 提示链模式概述
@@ -227,21 +234,21 @@ pip install langchain langchain-community langchain-openai langgraph
 
 这种结构化方法正是将一个**初级的 AI 工具**与一个更**复杂、更具上下文感知能力**的系统区分开来的关键。它将**上下文本身**视为一个主要组成部分，高度重视代理**知道什么、何时知道以及如何使用这些信息**。这种实践确保模型对用户的**意图、历史和当前环境**有一个全面的了解。最终，上下文工程是推动**无状态聊天机器人**发展成为**高度有能力、具备情境感知能力系统**的关键方法论。
 
-## 📋 概要
+## 概要
 
-### 🎯 是什么 (What)
+### 是什么 (What)
 
 复杂的任务在单个提示内处理时经常使 LLM 不堪重负，导致严重的性能问题。模型的**认知负荷**增加，导致**忽略指令、失去上下文**和**生成不正确信息**等错误的几率增加。一个**庞大**的提示难以有效地管理多个约束和顺序推理步骤。这导致**不可靠和不准确**的输出，因为 LLM 未能处理多方面请求的所有层面。
 
 ---
 
-### 💡 为什么 (Why)
+### 为什么 (Why)
 
 提示链通过将复杂问题分解为一系列**更小、相互关联的子任务**，提供了一个**标准化**的解决方案。链中的每一步都使用**有重点的提示**来执行特定的操作，从而显著提高了**可靠性和控制力**。一个提示的输出作为下一个提示的输入，创建了一个**逻辑工作流**，逐步构建出最终解决方案。这种**模块化、分而治之**的策略使过程更易于管理，更易于调试，并允许在步骤之间集成**外部工具或结构化数据格式**。这种模式是开发能够**规划、推理和执行复杂工作流**的复杂、多步**代理系统**的基础。
 
 ---
 
-### ✅ 经验法则 (Rule of thumb)
+### 经验法则 (Rule of thumb)
 
 当一个任务**对于单个提示来说过于复杂**、涉及**多个不同的处理阶段**、需要在**步骤之间与外部工具交互**，或者在构建需要执行**多步推理并维护状态**的代理系统时，请使用此模式。
 
@@ -267,9 +274,15 @@ pip install langchain langchain-community langchain-openai langgraph
 ## 参考资料
 
 LangChain 关于 LCEL 的文档：`https://python.langchain.com/v0.2/docs/core_modules/expression_language/`
+
 LangGraph 文档：`https://langchain-ai.github.io/langgraph/`
+
 提示工程指南 - 链接提示：`https://www.promptingguide.ai/techniques/chaining`
+
 OpenAI API 文档（通用提示概念）：`https://platform.openai.com/docs/guides/gpt/prompting`
+
 Crew AI 文档（任务和过程）：`https://docs.crewai.com/`
+
 Google AI for Developers（提示指南）：`https://cloud.google.com/discover/what-is-prompt-engineering?hl=en`
+
 Vertex 提示优化器：`https://cloud.google.com/vertex-ai/generative-ai/docs/learn/prompts/prompt-optimizer`
