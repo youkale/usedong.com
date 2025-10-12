@@ -51,16 +51,16 @@ _Agentic Design Patterns_
 3. [并行化 Parallelization](03-parallelization/) · 15 页
    → 并行处理，提升效率
 
-4. 反思 Reflection · 13 页
+4. [反思 Reflection](04-reflection/) · 13 页
    → 让 AI 自我审视与改进
 
-5. 工具使用 Tool Use · 20 页
+5. [工具使用 Tool Use](05-tool_use/) · 20 页
    → 赋予 AI 使用外部工具的能力
 
-6. 规划 Planning · 13 页
+6. [规划 Planning](06-planning/) · 13 页
    → 战略规划与任务分解
 
-7. 多智能体 Multi-Agent · 17 页
+7. [多智能体协作 Multi-Agent Collaboration](07-multi-agent-collaboration/) · 17 页
    → 多个智能体协同工作
 
 <br/>

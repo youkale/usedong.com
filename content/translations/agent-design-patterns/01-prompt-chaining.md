@@ -222,7 +222,7 @@ pip install langchain langchain-community langchain-openai langgraph
 
 **上下文工程（Context Engineering）**（见图 1）是**设计、构建和向 AI 模型提供完整信息环境**的一门系统性学科，它在模型开始生成 token 之前完成。这种方法论认为，模型输出的质量较少依赖于模型本身的架构，而更多依赖于**所提供上下文的丰富性**。
 
-![图片](/images/translations/01-context.png)
+![图片](/images/translations/agent-design-patterns/p1-01-context.png)
 
 **图 1：**上下文工程是为 AI 构建一个丰富、全面的信息环境的学科，因为这种上下文的质量是促成高级代理性能的首要因素。
 
@@ -254,7 +254,7 @@ pip install langchain langchain-community langchain-openai langgraph
 
 ## 视觉摘要
 
-![图片](/images/translations/01-prompt-chain.png)
+![图片](/images/translations/agent-design-patterns/p1-01-prompt-chain.png)
 
 **图 2：**提示链模式：代理接收来自用户的一系列提示，每个代理的输出都作为链中下一个代理的输入。
 

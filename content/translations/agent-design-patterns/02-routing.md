@@ -407,7 +407,7 @@ Final Output D: Booking action for 'Find flights to Tokyo next month.' has been 
 
 ### 图（Visual Summary）
 
-![图1](/images/translations/02-router-parttent.png)
+![图1](/images/translations/agent-design-patterns/p1-02-router-parttent.png)
 _Fig.1: Router pattern, using an LLM as a Router（使用大语言模型作为路由器的路由模式）_
 
 ## 关键要点（Key Takeaways）

@@ -8,7 +8,7 @@ book: "智能体设计模式"
 chapter: 3
 ---
 
-[← 上一章：路由](../02-routing/) | [返回目录](../)
+[← 上一章：路由](../02-routing/) | [返回目录](../) | [下一章：反思 →](../04-reflection/)
 
 ---
 
@@ -43,7 +43,7 @@ chapter: 3
 
 实现并行化通常需要支持异步执行或多线程/多进程的框架。现代智能体框架在设计时就考虑了异步操作，允许你轻松定义可以并行运行的步骤。
 
-![图1. 带有子智能体的并行化示例](/images/translations/parallelization-fig-1.png)
+![图1. 带有子智能体的并行化示例](/images/translations/agent-design-patterns/p1-parallelization-fig-1.png)
 
 
 LangChain、LangGraph 和 Google ADK 等框架提供了并行执行的机制。在 LangChain 表达式语言 (LCEL) 中，你可以通过使用 |（用于顺序）等运算符组合可运行对象，并通过构建具有并发执行分支的链或图来实现并行执行。LangGraph 凭借其图结构，允许从单个状态转换定义多个可以执行的节点，从而有效地在工作流中启用并行分支。Google ADK 提供了强大、原生的机制来促进和管理智能体（agent）的并行执行，显著提高了复杂、多智能体系统的效率和可扩展性。ADK 框架中的这种内在能力允许开发者设计和实现多个智能体可以并发而非顺序操作的解决方案。
@@ -406,7 +406,7 @@ if __name__ == "__main__":
 
 ## 可视化总结
 
-![图2](/images/translations/03-parallelization-02.png)
+![图2](/images/translations/agent-design-patterns/p1-03-parallelization-02.png)
 
 _图2：并行化设计模式_
 
