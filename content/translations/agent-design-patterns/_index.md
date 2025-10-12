@@ -67,16 +67,16 @@ _Agentic Design Patterns_
 
 ### 第二部分：记忆与适应（61 页）
 
-8. 记忆管理 Memory Management · 21 页
+8. [记忆管理 Memory Management](08-memory-management/) · 21 页
    → 构建智能体的记忆系统
 
-9. 学习与适应 Learning and Adaptation · 12 页
+9. [学习与适应 Learning and Adaptation](09-learning-and-adaptation/) · 12 页
    → 从经验中学习，持续进化
 
-10. 模型上下文协议 Model Context Protocol (MCP) · 16 页
+10. [模型上下文协议 Model Context Protocol (MCP)](10-model-context-protocol/) · 16 页
     → 标准化的上下文管理
 
-11. 目标设定与监控 Goal Setting and Monitoring · 12 页
+11. [目标设定与监控 Goal Setting and Monitoring](11-goal-setting-and-monitoring/) · 12 页
     → 设定目标并追踪执行
 
 <br/>
