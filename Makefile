@@ -18,7 +18,7 @@ deploy-cf: build ## 部署到 Cloudflare Pages（需要安装 wrangler）
 		echo "❌ wrangler 未安装，请运行: npm install -g wrangler"; \
 		exit 1; \
 	fi
-	wrangler pages deploy public --project-name=ykl-blog
+	wrangler pages deploy public --project-name=usedong
 
 test: ## 测试构建
 	@echo "🧪 测试构建..."
