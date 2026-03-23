@@ -598,9 +598,7 @@ Agent 把本次会话里值得保留的内容写进记忆文件，然后回复 `
 
 讲了这么多 openclaw 的设计，最后来看一个不依赖 openclaw、完全自建的 Agent [clj-mono](https://github.com/youkale/clj-mono) 实例——说明这套思路本身是通用的。
 
-这是我自己在跑的一个小红书自动运营 Agent，账号叫"那谁"，人设是两娃宝妈，持续输出育儿垂类内容。截至目前已经连续日更超过三周。
-
-{{< figure src="/images/xhs-nashui.jpg" caption="那谁 · 小红书号 929039844" >}}
+这是我自己在跑的一个小红书自动运营 Agent，账号叫"那谁"，持续输出育儿垂类内容。截至目前已经连续日更超过三周。
 
 ### 整体架构：clj-mono + 文件系统 + xhs-cli
 
