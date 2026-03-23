@@ -51,4 +51,29 @@
     </footer>
   </div>
 </article>
+
+{{ if strings.Contains .Content "language-mermaid" }}
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+  mermaid.initialize({
+    startOnLoad: false,
+    theme: 'dark',
+    themeVariables: {
+      background: '#0a1e1e',
+      primaryColor: '#1a3a2a',
+      primaryTextColor: '#e2e8f0',
+      lineColor: '#4ade80',
+      edgeLabelBackground: '#0a1e1e',
+      clusterBkg: '#0f2a1e',
+    }
+  });
+  document.querySelectorAll('pre code.language-mermaid').forEach(el => {
+    const container = document.createElement('div');
+    container.className = 'mermaid';
+    container.textContent = el.textContent;
+    el.parentElement.replaceWith(container);
+  });
+  await mermaid.run();
+</script>
+{{ end }}
 {{ end }}

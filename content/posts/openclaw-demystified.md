@@ -165,37 +165,37 @@ POST https://api.openai.com/v1/chat/completions
 
 ```mermaid
 sequenceDiagram
-    actor User as 用户
-    participant Loop as Agent Loop
-    participant LLM as LLM (API)
-    participant Tools as Tool Executor
+    actor U as User
+    participant LP as AgentLoop
+    participant AI as LLM
+    participant T as Tools
 
-    User->>Loop: 输入任务："帮我重构 auth.py"
+    U->>LP: 重构 auth.py
 
-    loop 每一轮迭代
-        Loop->>LLM: POST /v1/chat/completions<br/>(messages + tools)
-        LLM-->>Loop: finish_reason: "tool_calls"<br/>tool: read_file("auth.py")
+    loop each iteration
+        LP->>AI: chat completions
+        AI-->>LP: tool_calls read_file
 
-        Loop->>Tools: 执行 read_file("auth.py")
-        Tools-->>Loop: 文件内容
+        LP->>T: read_file
+        T-->>LP: 文件内容
 
-        Loop->>LLM: POST /v1/chat/completions<br/>(追加 tool result)
-        LLM-->>Loop: finish_reason: "tool_calls"<br/>tool: write_file("auth.py", new_content)
+        LP->>AI: chat completions
+        AI-->>LP: tool_calls write_file
 
-        Loop->>Tools: 执行 write_file(...)
-        Tools-->>Loop: 写入成功
+        LP->>T: write_file
+        T-->>LP: 写入成功
 
-        Loop->>LLM: POST /v1/chat/completions
-        LLM-->>Loop: finish_reason: "tool_calls"<br/>tool: bash("python -m pytest")
+        LP->>AI: chat completions
+        AI-->>LP: tool_calls bash
 
-        Loop->>Tools: 执行 bash(...)
-        Tools-->>Loop: 测试通过 ✓
+        LP->>T: bash pytest
+        T-->>LP: 测试通过
 
-        Loop->>LLM: POST /v1/chat/completions
-        LLM-->>Loop: finish_reason: "stop"<br/>"重构完成，所有测试通过。"
+        LP->>AI: chat completions
+        AI-->>LP: finish_reason stop
     end
 
-    Loop-->>User: 任务完成
+    LP-->>U: 任务完成
 ```
 
 循环的退出条件就是 `finish_reason: "stop"`——模型自己决定"我干完了"。
@@ -277,29 +277,29 @@ make_plan(steps)          # 展示执行计划，等待确认
 
 ```mermaid
 sequenceDiagram
-    actor User as 用户
-    participant Loop as Agent Loop
-    participant LLM as LLM (API)
+    actor U as User
+    participant LP as AgentLoop
+    participant AI as LLM
 
-    User->>Loop: "帮我初始化一个新项目"
+    U->>LP: 初始化新项目
 
-    Loop->>LLM: POST /v1/chat/completions
-    LLM-->>Loop: finish_reason: "tool_calls"<br/>tool: ask_question("用 TS 还是 JS？")
+    LP->>AI: chat completions
+    AI-->>LP: tool_calls ask_question
 
-    Note over Loop: ⏸ 循环暂停，等待用户
+    Note over LP: 循环暂停 等待用户
 
-    Loop-->>User: "用 TS 还是 JS？"
-    User->>Loop: "TypeScript"
+    LP-->>U: 用 TS 还是 JS
+    U->>LP: TypeScript
 
-    Note over Loop: ▶ 携带回答，恢复循环
+    Note over LP: 携带回答 恢复循环
 
-    Loop->>LLM: POST /v1/chat/completions<br/>(tool result: "TypeScript")
-    LLM-->>Loop: finish_reason: "tool_calls"<br/>tool: bash("npm init && npx tsc --init")
+    LP->>AI: chat completions
+    AI-->>LP: tool_calls bash
 
-    Loop->>Loop: 执行命令...
-    LLM-->>Loop: finish_reason: "stop"<br/>"项目初始化完成。"
+    LP->>LP: 执行命令
+    AI-->>LP: finish_reason stop
 
-    Loop-->>User: 任务完成
+    LP-->>U: 任务完成
 ```
 
 这个设计解决了三个问题：
@@ -324,17 +324,17 @@ Claude Code 的 Plan Mode 就是这么实现的——进入执行阶段之前，
 
 ```mermaid
 sequenceDiagram
-    participant LLM as LLM
-    participant Exec as 本地 Executor
-    participant Terminal as 终端 (stdin/stdout)
-    actor Dev as 开发者（坐在电脑前）
+    participant AI as LLM
+    participant EX as Executor
+    participant TM as Terminal
+    actor DV as Dev
 
-    LLM-->>Exec: tool_call: ask_question("用 TS 还是 JS？")
-    Exec->>Terminal: 打印问题到终端
-    Terminal-->>Dev: 显示问题
-    Dev->>Terminal: 输入答案
-    Terminal-->>Exec: 读取输入
-    Exec->>LLM: tool_result: "TypeScript"
+    AI-->>EX: tool_call ask_question
+    EX->>TM: 打印问题
+    TM-->>DV: 显示问题
+    DV->>TM: 输入答案
+    TM-->>EX: 读取输入
+    EX->>AI: tool_result TypeScript
 ```
 
 整个交互发生在终端里。你**必须坐在电脑前面**。
@@ -345,50 +345,48 @@ openclaw 做的事情，就是把这个"本地 Executor"换成一个**网关**�
 
 ```mermaid
 sequenceDiagram
-    participant LLM as LLM
-    participant GW as Openclaw Gateway
-    participant IM as IM 平台（飞书/Telegram）
-    actor Phone as 你的手机 📱
+    participant AI as LLM
+    participant GW as Gateway
+    participant IM as IM
+    actor PH as Phone
 
-    LLM-->>GW: tool_call: ask_question("用 TS 还是 JS？")
+    AI-->>GW: tool_call ask_question
 
-    Note over GW: 拦截 tool_call，转发到 IM
+    Note over GW: 拦截并转发到 IM
 
-    GW->>IM: 推送消息（long poll / webhook）
-    IM-->>Phone: 收到通知
+    GW->>IM: 推送消息
+    IM-->>PH: 收到通知
 
-    Note over Phone: 你在外面，掏出手机回复
+    Note over PH: 掏出手机回复
 
-    Phone->>IM: 回复 "TypeScript"
+    PH->>IM: 回复 TypeScript
     IM-->>GW: 收到用户消息
 
-    Note over GW: 包装成 tool_result，喂回 LLM
+    Note over GW: 包装成 tool_result
 
-    GW->>LLM: tool_result: "TypeScript"
+    GW->>AI: tool_result TypeScript
 ```
 
 本质上，**它把终端 stdin/stdout 这条本地 I/O 通道，替换成了一条经过 IM 的远程 I/O 通道**。
 
 架构全景：
 
-```
-┌──────────────────────────────────────────────────────┐
-│                     你的服务器                        │
-│                                                       │
-│  ┌──────────────┐      ┌──────────────────────────┐   │
-│  │  Agent Loop  │ ───► │    Openclaw Gateway       │   │
-│  │  (LLM 驱动)  │ ◄─── │  (拦截 tool_call/result) │   │
-│  └──────────────┘      └────────────┬─────────────┘   │
-│                                     │ long poll / webhook
-└─────────────────────────────────────┼─────────────────┘
-                                      │
-                      ┌───────────────▼──────────────┐
-                      │          IM 平台              │
-                      │  飞书 / Telegram / Discord    │
-                      └──────────────────────────────┘
-                                      │
-                                      ▼
-                                 你的手机 📱
+```mermaid
+graph TD
+    subgraph SRV["你的服务器"]
+        LP["Agent Loop\nLLM 驱动"]
+        GW["Openclaw Gateway\n拦截 tool_call / result"]
+        LP -- tool_call --> GW
+        GW -- tool_result --> LP
+    end
+
+    GW -- long poll / webhook --> CH
+
+    subgraph IM["IM 平台"]
+        CH["飞书 / Telegram / Discord"]
+    end
+
+    CH --> PH["你的手机"]
 ```
 
 ---
