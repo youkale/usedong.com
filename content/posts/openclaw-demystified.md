@@ -2,12 +2,22 @@
 title: "Openclaw 也不是那么神奇"
 date: 2026-03-23
 tags: ["LLM", "Agent", "Claude", "工具调用", "架构"]
-summary: "从 function call 到 agent loop，再到 openclaw 的网关设计——拆开来看，其实没那么复杂"
+summary: "介绍 openclaw 与 clj-mono 的 Agent 实现，以及用 Agent 自动运营小红书三周的实践"
 ---
 
-最近 openclaw 在群里传得挺热，让 Claude Code 跑在微信/飞书/Telegram 里，感觉很魔法。
+最近 openclaw 在群里传得挺热，让 OpenClaw 跑在飞书/Telegram 里，感觉很魔法。
 
-但其实拆开来看，核心思路并不复杂。本文试着从头把这条链路讲清楚，读完之后你会发现：**所谓"AI Agent 接入 IM"，不过是对已有机制的一次恰当组合。**
+但其实拆开来看，核心思路并不复杂。**本文将介绍 openclaw 的实现原理，以及我自己用 Clojure 写的 [clj-mono](https://github.com/youkale/clj-mono) 的同类实现，并以一个实际跑了三周的小红书自动运营 Agent 为例，说明这套思路在生产环境里长什么样。**
+
+读完你会发现：所谓"AI Agent"，不过是对几个已有机制的恰当组合——function call、agent loop、工具调用、文件系统。没有什么神秘的地方。
+
+### 本文涉及的三个项目
+
+| 项目 | 定位 | 语言 |
+|---|---|---|
+| [openclaw](https://github.com/openclaw/openclaw) | 个人 AI 助理，接入 IM 渠道（飞书/Telegram 等） | TypeScript |
+| [clj-mono](https://github.com/youkale/clj-mono) | 我自己实现的轻量 Agent 框架 | Clojure |
+| xhs 运营 Agent | 基于 clj-mono 构建的小红书自动运营系统 | — |
 
 ---
 
